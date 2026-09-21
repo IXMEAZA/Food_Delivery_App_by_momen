@@ -1,5 +1,3 @@
-import 'dart:nativewrappers/_internal/vm/lib/internal_patch.dart';
-
 import 'package:flutter/material.dart';
 
 class AccountPage extends StatelessWidget {
@@ -17,7 +15,7 @@ class AccountPage extends StatelessWidget {
               shape: BoxShape.circle,
               image: DecorationImage(
                 fit: BoxFit.cover,
-                alignment:    Alignment.topCenter,
+                alignment: Alignment.topCenter,
 
                 image: AssetImage('assets/images/momenoe.jpg'),
               ),
