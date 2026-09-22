@@ -61,6 +61,7 @@ flutter:
   assets:
     - assets/images/classic_burger.jpg
     - assets/images/momenoe.jpg
+    - assets/images/pngtree-save.png
     
   #   - images/a_dot_ham.jpeg
 

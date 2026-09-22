@@ -15,7 +15,13 @@ class _FavoritesPageState extends State<FavoritesPage> {
 
     if (favoriteFood.isEmpty) {
       return const Center(
-        child: Text('No favorites added yet!', style: TextStyle(fontSize: 16)),
+        child: Column(
+          children: [
+            Image(image: AssetImage('assets/images/pngtree-save.png')),
+            SizedBox(height: 16),
+            Text('No favorites added yet!', style: TextStyle(fontSize: 16)),
+          ],
+        ),
       );
     }
 
@@ -59,9 +65,11 @@ class _FavoritesPageState extends State<FavoritesPage> {
                 IconButton(
                   onPressed: () {
                     final targetedItem = favoriteFood[index];
-                  int targetIndex=  food.indexOf(targetedItem);
+                    int targetIndex = food.indexOf(targetedItem);
                     setState(() {
-                      food[targetIndex] = food[targetIndex].copyWith(isFavorite: false);
+                      food[targetIndex] = food[targetIndex].copyWith(
+                        isFavorite: false,
+                      );
                       favoriteFood.remove(targetedItem);
                     });
                   },
