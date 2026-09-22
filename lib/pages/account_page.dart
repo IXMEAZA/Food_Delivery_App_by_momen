@@ -6,6 +6,7 @@ class AccountPage extends StatelessWidget {
   Widget orderVoucherItem({
     required int numOFItems,
     required String orderName,
+    required Color color,
   }) {
     return Column(
       children: [
@@ -13,7 +14,7 @@ class AccountPage extends StatelessWidget {
           numOFItems.toString(),
 
           style: TextStyle(
-            color: const Color.fromARGB(255, 187, 106, 81),
+            color: color,
             fontSize: 28,
             fontWeight: FontWeight.w700,
           ),
@@ -26,11 +27,26 @@ class AccountPage extends StatelessWidget {
     );
   }
 
+  ListTile itemTappedTile({
+    required String title,
+    required IconData icon,
+    required Color color,
+    String? sub,
+  }) {
+    return ListTile(
+      leading: Icon(icon, color: color, size: 40),
+      subtitle: sub != null ? Text(sub) : null,
+      title: Text(title),
+      trailing: Icon(Icons.arrow_forward_ios_outlined),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Column(
         children: [
+          SizedBox(height: 8),
           Container(
             height: 250,
             decoration: const BoxDecoration(
@@ -51,37 +67,34 @@ class AccountPage extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              orderVoucherItem(orderName: 'Orders', numOFItems: 100),
-              orderVoucherItem(orderName: 'Vouchers', numOFItems: 100),
+              orderVoucherItem(
+                orderName: 'Orders',
+                numOFItems: 100,
+                color: Theme.of(context).primaryColor,
+              ),
+              orderVoucherItem(
+                orderName: 'Vouchers',
+                numOFItems: 100,
+                color: Theme.of(context).primaryColor,
+              ),
             ],
           ),
           Divider(thickness: 2, indent: 20, endIndent: 20),
           itemTappedTile(
+            color: Theme.of(context).primaryColor,
             icon: Icons.shopping_cart,
             title: 'Past Orders',
             sub: 'Here is your past orders',
           ),
           Divider(thickness: 2, indent: 20, endIndent: 20),
           itemTappedTile(
+            color: Theme.of(context).primaryColor,
             icon: Icons.card_giftcard,
             title: 'Available Vouchers',
           ),
           Divider(thickness: 2, indent: 20, endIndent: 20),
         ],
       ),
-    );
-  }
-
-  ListTile itemTappedTile({
-    required String title,
-    required IconData icon,
-    String? sub,
-  }) {
-    return ListTile(
-      leading: Icon(icon, color: Colors.deepOrange, size: 40),
-      subtitle: sub != null ? Text(sub) : null,
-      title: Text(title),
-      trailing: Icon(Icons.arrow_forward_ios_outlined),
     );
   }
 }

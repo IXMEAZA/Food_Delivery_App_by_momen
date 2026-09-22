@@ -56,7 +56,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
-                        color: Colors.deepOrange,
+                        color: Theme.of(context).primaryColor,
                       ),
                     ),
                   ],
@@ -73,7 +73,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                       favoriteFood.remove(targetedItem);
                     });
                   },
-                  icon: Icon(Icons.favorite, color: Colors.deepOrange),
+                  icon: Icon(Icons.favorite, color:Theme.of(context).primaryColor),
                 ),
               ],
             ),

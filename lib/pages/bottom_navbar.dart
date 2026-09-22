@@ -20,24 +20,24 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> bodyOptions = [
-      HomePage(),
-      FavoritesPage(),
-    AccountPage(),
-    ];
+    List<Widget> bodyOptions = [HomePage(), FavoritesPage(), AccountPage()];
 
     return Scaffold(
       body: bodyOptions[selectedIndex],
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
-        backgroundColor: Colors.grey[100],
-        title: Text("Foodek"),
+        backgroundColor: Theme.of(context).primaryColor,
+        title: Text("Foodek", style: TextStyle(color: Colors.white)),
         centerTitle: true,
-        elevation: 0,
+        elevation: 3,
       ),
-      drawer: Drawer(child: Text("i'm in drawer")),
+      drawer: Drawer(
+        shadowColor: Colors.white,
+        backgroundColor: Colors.white,
+        child: Center(child: Text("i'm in drawer")),
+      ),
       bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Colors.deepOrange,
+        selectedItemColor: Theme.of(context).primaryColor,
 
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),

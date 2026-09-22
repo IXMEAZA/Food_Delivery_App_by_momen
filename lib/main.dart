@@ -15,7 +15,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'foodek - Food Delivery',
-      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
+
+      theme: ThemeData(useMaterial3: false, primarySwatch: Colors.deepOrange),
       home: BottomNavBarPage(),
     );
   }
