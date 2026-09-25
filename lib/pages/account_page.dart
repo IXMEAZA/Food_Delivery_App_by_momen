@@ -7,15 +7,16 @@ class AccountPage extends StatelessWidget {
     required int numOFItems,
     required String orderName,
     required Color color,
+    required BuildContext context,
   }) {
     return Column(
       children: [
         Text(
           numOFItems.toString(),
 
-          style: TextStyle(
+          style: Theme.of(context).textTheme.headlineSmall!.copyWith(
             color: color,
-            fontSize: 28,
+
             fontWeight: FontWeight.w700,
           ),
         ),
@@ -43,12 +44,13 @@ class AccountPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size = MediaQuery.of(context).size;
     return Center(
       child: Column(
         children: [
           SizedBox(height: 8),
           Container(
-            height: 250,
+            height: Size.height * 0.3,
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(
@@ -60,19 +62,24 @@ class AccountPage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16.0),
-          const Text(
+          Text(
             "Abdalmomen Essa",
-            style: TextStyle(fontSize: 32, fontWeight: FontWeight.w600),
+            style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+              color: Colors.black,
+              fontWeight: FontWeight.w600,
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               orderVoucherItem(
+                context: context,
                 orderName: 'Orders',
                 numOFItems: 100,
                 color: Theme.of(context).primaryColor,
               ),
               orderVoucherItem(
+                context: context,
                 orderName: 'Vouchers',
                 numOFItems: 100,
                 color: Theme.of(context).primaryColor,

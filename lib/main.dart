@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 
 import 'package:food_delivery/pages/bottom_navbar.dart';
@@ -16,7 +17,19 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'foodek - Food Delivery',
 
-      theme: ThemeData(useMaterial3: false, primarySwatch: Colors.deepOrange),
+      theme: ThemeData(
+        useMaterial3: false,
+        primarySwatch: Colors.deepOrange,
+        textTheme: TextTheme(),
+        fontFamily: 'OpenSans',
+        appBarTheme: AppBarTheme(
+          foregroundColor: Colors.white,
+          backgroundColor: Colors.deepOrange,
+
+          centerTitle: true,
+          elevation: 3,
+        ),
+      ),
       home: BottomNavBarPage(),
     );
   }

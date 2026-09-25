@@ -13,6 +13,7 @@ class _FoodGridItemState extends State<FoodGridItem> {
   bool isfav = false;
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -24,8 +25,12 @@ class _FoodGridItemState extends State<FoodGridItem> {
         child: Column(
           children: [
             Stack(
+              alignment: AlignmentGeometry.topCenter,
               children: [
-                Image.network(food[widget.foodIndex].imgUrl, height: 100),
+                Image.network(
+                  food[widget.foodIndex].imgUrl,
+                  height: size.height * 0.1,
+                ),
                 Align(
                   alignment: Alignment.topRight,
                   child: Container(
@@ -35,11 +40,15 @@ class _FoodGridItemState extends State<FoodGridItem> {
                     ),
                     child: GestureDetector(
                       onTap: () => setState(() {
-                      
-                        food[widget.foodIndex]=   food[widget.foodIndex].copyWith(isFavorite: !food[widget.foodIndex].isFavorite);
+                        food[widget.foodIndex] = food[widget.foodIndex]
+                            .copyWith(
+                              isFavorite: !food[widget.foodIndex].isFavorite,
+                            );
                       }),
                       child: Icon(
-                        food[widget.foodIndex].isFavorite ? Icons.favorite : Icons.favorite_border,
+                        food[widget.foodIndex].isFavorite
+                            ? Icons.favorite
+                            : Icons.favorite_border,
                         color: Theme.of(context).primaryColor,
                       ),
                     ),
@@ -51,16 +60,16 @@ class _FoodGridItemState extends State<FoodGridItem> {
             const SizedBox(height: 4),
             Text(
               food[widget.foodIndex].name,
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+              style: Theme.of(
+                context,
+              ).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: 2),
             Text(
               "\$ ${food[widget.foodIndex].price.toString()}",
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-                color: Theme.of(context).primaryColor,
-              ),
+              style: Theme.of(context).textTheme.titleLarge!
+                  .copyWith(fontWeight: FontWeight.w600)
+                  .copyWith(color: Theme.of(context).primaryColor),
             ),
           ],
         ),

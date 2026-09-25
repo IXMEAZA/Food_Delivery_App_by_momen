@@ -26,10 +26,7 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
       body: bodyOptions[selectedIndex],
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
-        backgroundColor: Theme.of(context).primaryColor,
         title: Text("Foodek", style: TextStyle(color: Colors.white)),
-        centerTitle: true,
-        elevation: 3,
       ),
       drawer: Drawer(
         shadowColor: Colors.white,

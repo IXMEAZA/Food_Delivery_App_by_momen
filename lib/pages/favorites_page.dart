@@ -11,6 +11,8 @@ class FavoritesPage extends StatefulWidget {
 class _FavoritesPageState extends State<FavoritesPage> {
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     final favoriteFood = food.where((item) => item.isFavorite).toList();
 
     if (favoriteFood.isEmpty) {
@@ -19,7 +21,10 @@ class _FavoritesPageState extends State<FavoritesPage> {
           children: [
             Image(image: AssetImage('assets/images/pngtree-save.png')),
             SizedBox(height: 16),
-            Text('No favorites added yet!', style: TextStyle(fontSize: 16)),
+            Text(
+              'No favorites added yet!',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
+            ),
           ],
         ),
       );
@@ -37,8 +42,8 @@ class _FavoritesPageState extends State<FavoritesPage> {
               children: [
                 Image(
                   image: NetworkImage(favoriteFood[index].imgUrl),
-                  height: 70,
-                  width: 90,
+                  height: size.height * 0.08,
+                  width: size.height * 0.1,
                 ),
                 SizedBox(width: 8),
                 Column(
@@ -46,16 +51,14 @@ class _FavoritesPageState extends State<FavoritesPage> {
                   children: [
                     Text(
                       favoriteFood[index].name,
-                      style: TextStyle(
-                        fontSize: 20,
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                     Text(
                       "\$ ${favoriteFood[index].price.toString()}",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                        fontWeight: FontWeight.w700,
                         color: Theme.of(context).primaryColor,
                       ),
                     ),
@@ -73,7 +76,10 @@ class _FavoritesPageState extends State<FavoritesPage> {
                       favoriteFood.remove(targetedItem);
                     });
                   },
-                  icon: Icon(Icons.favorite, color:Theme.of(context).primaryColor),
+                  icon: Icon(
+                    Icons.favorite,
+                    color: Theme.of(context).primaryColor,
+                  ),
                 ),
               ],
             ),
