@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:food_delivery/models/food_item.dart';
+import 'package:food_delivery/pages/food_details_page.dart';
 import 'package:food_delivery/widgets/food_grid_item.dart';
 
 class HomePage extends StatelessWidget {
@@ -8,6 +10,8 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double heights = MediaQuery.of(context).size.height;
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: SingleChildScrollView(
@@ -22,7 +26,8 @@ class HomePage extends StatelessWidget {
               ),
             ),
             SizedBox(height: heights * 0.03),
-            GridView.builder(physics: const NeverScrollableScrollPhysics(),
+            GridView.builder(
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: food.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -30,8 +35,14 @@ class HomePage extends StatelessWidget {
                 crossAxisSpacing: heights * 0.02,
                 mainAxisSpacing: heights * 0.02,
               ),
-              itemBuilder: (context, index) =>
-                  FoodGridItem(foodIndex: index),
+              itemBuilder: (context, index) => GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => FoodDetailsPage(foodItem: food[index])),
+                  );
+                },
+                child: FoodGridItem(foodIndex: index),
+              ),
             ),
           ],
         ),

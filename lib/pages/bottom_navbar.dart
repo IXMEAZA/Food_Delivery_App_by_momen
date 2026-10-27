@@ -1,4 +1,6 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:food_delivery/pages/account_page.dart';
 import 'package:food_delivery/pages/home_page.dart';
 import 'package:food_delivery/pages/favorites_page.dart';
@@ -22,12 +24,21 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
   Widget build(BuildContext context) {
     List<Widget> bodyOptions = [HomePage(), FavoritesPage(), AccountPage()];
 
+    final PreferredSizeWidget? appBar;
+    if (Platform.isAndroid) {
+      appBar = AppBar(
+        title: Text("Foodek", style: TextStyle(color: Colors.white)),
+      );
+    } else if (Platform.isIOS) {
+      appBar = CupertinoNavigationBar();
+    } else {
+      appBar = null;
+    }
+
     return Scaffold(
       body: bodyOptions[selectedIndex],
       backgroundColor: Colors.grey[100],
-      appBar: AppBar(
-        title: Text("Foodek", style: TextStyle(color: Colors.white)),
-      ),
+      appBar: appBar,
       drawer: Drawer(
         shadowColor: Colors.white,
         backgroundColor: Colors.white,

@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+// import 'package:flutter/services.dart';
 
 import 'package:food_delivery/pages/bottom_navbar.dart';
 
 void main() {
+  //this is for lock the screen orientation
+  // WidgetsFlutterBinding.ensureInitialized();
+  // SystemChrome.setPreferredOrientations([
+  //   DeviceOrientation.portraitDown,
+  //   DeviceOrientation.portraitUp,
+  // ]);
   runApp(const MyApp());
 }
 

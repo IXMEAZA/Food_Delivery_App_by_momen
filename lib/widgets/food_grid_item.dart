@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/models/food_item.dart';
+import 'package:food_delivery/widgets/favorite_bottom.dart';
 
-class FoodGridItem extends StatefulWidget {
+class FoodGridItem extends StatelessWidget {
   final int foodIndex;
-  const FoodGridItem({super.key, required this.foodIndex});
+  FoodGridItem({super.key, required this.foodIndex});
 
-  @override
-  State<FoodGridItem> createState() => _FoodGridItemState();
-}
-
-class _FoodGridItemState extends State<FoodGridItem> {
   bool isfav = false;
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -22,56 +19,41 @@ class _FoodGridItemState extends State<FoodGridItem> {
 
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Stack(
-              alignment: AlignmentGeometry.topCenter,
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return Column(
               children: [
-                Image.network(
-                  food[widget.foodIndex].imgUrl,
-                  height: size.height * 0.1,
+                Stack(
+                  alignment: Alignment.topCenter,
+                  children: [
+                    Image.network(
+                      food[foodIndex].imgUrl,
+                      height: constraints.maxHeight * 0.6,
+                    ),
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: FavoriteBottom(foodIndex: foodIndex,height: constraints.maxHeight*0.2,width: constraints.maxWidth*0.2,),
+                    ),
+                  ],
                 ),
-                Align(
-                  alignment: Alignment.topRight,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey[100],
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: GestureDetector(
-                      onTap: () => setState(() {
-                        food[widget.foodIndex] = food[widget.foodIndex]
-                            .copyWith(
-                              isFavorite: !food[widget.foodIndex].isFavorite,
-                            );
-                      }),
-                      child: Icon(
-                        food[widget.foodIndex].isFavorite
-                            ? Icons.favorite
-                            : Icons.favorite_border,
-                        color: Theme.of(context).primaryColor,
-                      ),
-                    ),
-                  ),
+
+                SizedBox(height: constraints.maxHeight * 0.02),
+                Text(
+                  food[foodIndex].name,
+                  style: Theme.of(
+                    context,
+                  ).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.w700),
+                ),
+                SizedBox(height: constraints.maxHeight * 0.02),
+                Text(
+                  "\$ ${food[foodIndex].price.toString()}",
+                  style: Theme.of(context).textTheme.titleLarge!
+                      .copyWith(fontWeight: FontWeight.w600)
+                      .copyWith(color: Theme.of(context).primaryColor),
                 ),
               ],
-            ),
-
-            const SizedBox(height: 4),
-            Text(
-              food[widget.foodIndex].name,
-              style: Theme.of(
-                context,
-              ).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.w700),
-            ),
-            const SizedBox(height: 2),
-            Text(
-              "\$ ${food[widget.foodIndex].price.toString()}",
-              style: Theme.of(context).textTheme.titleLarge!
-                  .copyWith(fontWeight: FontWeight.w600)
-                  .copyWith(color: Theme.of(context).primaryColor),
-            ),
-          ],
+            );
+          },
         ),
       ),
     );
